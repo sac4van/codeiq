@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+  problem:
+    https://codeiq.jp/q/3284
+
   preprocessing:
     for r = 1, 2, ..., p-1,
     a[r] = F(r,p) = r!  mod p
-    a[p-1] = -1
+    a[p-1] = -1 (Wilson's theorem)
 
   main:
     F(n, p)

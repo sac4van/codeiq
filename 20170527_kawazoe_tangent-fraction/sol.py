@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+problem:
+  https://codeiq.jp/q/3182
+
 Let
  tan(¥alpha) = 1/a,
  tan(¥beta) = 1/b,
