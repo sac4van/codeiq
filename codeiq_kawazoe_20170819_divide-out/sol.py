@@ -21,15 +21,18 @@ import sys
 def solve(_input):
     """
     main function.
+
+    Arguments:
+    _input -- string of the format "n p", where n and p are positive integer, separated by space " ".
     """
 
     # input validation
     _l = _input.split(" ")
-    _n, _p = int(_l[0]), int(_l[1])
-
-    # if _p = 2 return 1
-    if _p == 2:
-        return 1
+    try:
+        _n, _p = int(_l[0]), int(_l[1])
+    except (ValueError, IndexError) as ex:
+        print ('ERROR: please input a string of the format "n p", where n and p are positive integer.')
+        return -1
 
     # preprocessing
     _a = [1, 1]
