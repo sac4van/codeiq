@@ -8,7 +8,8 @@ from __future__ import print_function
 import sys
 
 def solve(_input):
-    """main function.
+    """
+    main function.
 
     Arguments:
     _input -- maximum value of |a| and |b|
@@ -17,8 +18,8 @@ def solve(_input):
     ## input validation
     try:
         _max = int(_input)
-    except ValueError as _ex:
-        print ('error: %s' % (_ex) )
+    except ValueError as ex:
+        print ('error: %s' % (ex) )
         return -1
 
     ## preprocessing
