@@ -9,9 +9,8 @@
     a[p-1] = -1 (Wilson's theorem)
 
   main:
-    F(n, p)
-    = F(n[1], p) * a[r[1]] * a[-1]^n[1]
-        where n[1], r[1] are quotient and reminder of n divided by p
+    F(n, p) = F(q, p) * a[r] * (-1)^q
+        where q, r are quotient and reminder when n is divided by p.
 
 """
 
@@ -31,7 +30,7 @@ def solve(_input):
     try:
         _n, _p = int(_l[0]), int(_l[1])
     except (ValueError, IndexError) as ex:
-        print ('ERROR: please input a string of the format "n p", where n and p are positive integer.')
+        print ('[ERROR] Please input a string of the format "n p", where n and p are positive integer.')
         return -1
 
     # preprocessing
