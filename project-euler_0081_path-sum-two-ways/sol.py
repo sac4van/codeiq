@@ -29,6 +29,7 @@
 
 from __future__ import print_function
 
+
 def solve(_input='p081_matrix.txt'):
     """
     main function.
@@ -37,14 +38,14 @@ def solve(_input='p081_matrix.txt'):
     _input: input file.
     """
 
-    ## input validation
+    # input validation
     try:
         _input_file = open(_input, 'r')
     except IOError:
         print('[ERROR] failed to open file %s' % (_input))
         return -1
 
-    ## preprocessing
+    # preprocessing
     # read file & prepare matrix
     _a = []
     for line in _input_file:
@@ -58,52 +59,42 @@ def solve(_input='p081_matrix.txt'):
 
     # initialize sol matrix
     sol = []
-    _m = 0
-    while _m <= _max:
-        _n = 0
+    for _m in xrange(0, _max + 1, 1):
         _li = []
-        while _n <= _max:
+        for _n in xrange(0, _max + 1, 1):
             _li.append(0)
-            _n += 1
         sol.append(_li)
-        _m += 1
-    
 
-    ## main
+    # main
     # initial condition
     sol[0][0] = _a[0][0]
 
     # calculate sol[_m][_n] for fixed _m + _n = _npm
-    _mpn = 1 
-    while _mpn <= _max:
+    for _mpn in xrange(1, _max + 1, 1):
 
         # _m = 0
-        sol[0][_mpn] = sol[0][_mpn-1] + _a[0][_mpn]
+        sol[0][_mpn] = sol[0][_mpn - 1] + _a[0][_mpn]
 
         # 0 < _m < _npm
         _m = 1
         while _m < _mpn:
             _n = _mpn - _m
-            sol[_m][_n] = min(sol[_m-1][_n], sol[_m][_n-1]) + _a[_m][_n]
+            sol[_m][_n] = min(sol[_m - 1][_n], sol[_m][_n - 1]) + _a[_m][_n]
             _m += 1
 
         # _m = _mpn
-        sol[_mpn][0] = sol[_mpn-1][0] + _a[_mpn][0]
+        sol[_mpn][0] = sol[_mpn - 1][0] + _a[_mpn][0]
 
-        _mpn += 1
-
-    while _mpn <= 2 * _max:
-
+    for _mpn in xrange(_max + 1, 2 * _max + 1, 1):
         # _npm - _max <= _m <= _max
         _m = _mpn - _max
         while _m <= _max:
             _n = _mpn - _m
-            sol[_m][_n] = min(sol[_m-1][_n], sol[_m][_n-1]) + _a[_m][_n]
+            sol[_m][_n] = min(sol[_m - 1][_n], sol[_m][_n - 1]) + _a[_m][_n]
             _m += 1
 
-        _mpn += 1
-
     return sol[_max][_max]
+
 
 # call
 print (solve())

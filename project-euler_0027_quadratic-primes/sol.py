@@ -5,64 +5,53 @@
 """
 
 from __future__ import print_function
-import sys
 
-def solve(_input):
+
+def solve():
     """
     main function.
 
     Arguments:
-    _input -- maximum value of |a| and |b|
+    None
     """
 
-    ## input validation
-    try:
-        _max = int(_input)
-    except ValueError as ex:
-        print ('error: %s' % (ex) )
-        return -1
+    # input validation
+    _max = 1000
 
-    ## preprocessing
+    # preprocessing
     # generate prime table
     _max_prime = 2 * _max * _max + _max
-    is_prime = [False, False]
-    _i = 2
-    while _i < _max_prime:
-        is_prime.append(True)
-        _i += 1
 
-    _i, _j = 2, 1
-    while _i < _max_prime:
+    is_prime = [True for _x in xrange(_max_prime)]
+    is_prime[0] = False
+    is_prime[1] = False
+
+    primes = []
+
+    for _i in xrange(2, _max_prime):
         if is_prime[_i]:
-            _j = 2 * _i
-            while _j < _max_prime:
+            primes.append(_i)
+            for _j in xrange(2 * _i, _max_prime, _i):
                 is_prime[_j] = False
-                _j += _i
-        _i += 1
 
-    ## main
+    # main
     _ans = 0
     _n_max = 0
 
     _a = - _max + 1
-    while _a < _max:
-        _b = 2
-        while _b < _max:
+    for _a in xrange(-_max + 1, _max, 1):
+        for _b in xrange(2, _max, 1):
             if is_prime[_b]:
-                _n = 1
-                while _n < _b:
+                for _n in xrange(1, _b, 1):
                     _fn = _n * _n + _a * _n + _b
                     if _fn >= _max_prime or _fn < 1 or not is_prime[_fn]:
+                        if _n > _n_max:
+                            _n_max = _n
+                            _ans = _a * _b
                         break
-                    _n += 1
-                if _n > _n_max:
-                    _n_max = _n
-                    _ans = _a * _b
-                    # print (_a, _b, _n)
-            _b +=1
-        _a += 1
 
     return _ans
 
+
 # call
-print (solve(sys.stdin.readline()))
+print (solve())
