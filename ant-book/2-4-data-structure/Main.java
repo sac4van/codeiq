@@ -19,7 +19,8 @@ public class Main {
     static void input(){
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
-        L = sc.nextInt();
+        L = 
+        sc.nextInt();
         P = sc.nextInt();
         A = Arrays.asList(
                 sc.next().split(",")
@@ -40,14 +41,49 @@ public class Main {
      * solver
      */
     static void solve(){
-        ans=2;
-    }
+        A.add(L);
+        B.add(0);
+        N++;
 
-    /**
-     * output
-     */
-    static void output(){
+        // gas station queue
+        PriorityQueue<Integer> que = new PriorityQueue<Integer>();
+
+        // # of supply
+        ans = 0;
+
+        // current position
+        int pos = 0;
+
+        // current fuel
+        int tank = P;
+
+        for (int i=0; i<N; i++){
+            System.out.println("i:  " + i);
+            // next distance
+            int d = A.get(i) - pos;
+            System.out.println(" pos: " + pos);
+            System.out.println(" d: " + d);
+
+            // supply sufficient fuel
+            System.out.print(" tank: " + tank);
+            while (tank - d < 0) {
+                if (que.isEmpty()) {
+                    System.out.println("-1");
+                    return;
+                }
+                System.out.print(" -> " + que.peek());
+                tank += que.poll();
+                ans++;
+            }
+            System.out.println("");
+
+            tank -= d;
+            pos = A.get(i);
+            que.offer(B.get(i));
+        }
+
         System.out.println(ans);
+
     }
 
     public static void main(String args[]) {
@@ -55,7 +91,5 @@ public class Main {
         input();
 
         solve();
-
-        output();
     }
 }
