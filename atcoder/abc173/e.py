@@ -41,6 +41,22 @@ def main():
     ans = 1
     p.sort()
     n.sort()
+
+    if len(p) + len(n) < k:
+        print(0)
+        exit()
+    elif len(p) + len(n) == k:
+        if len(n) & 1 == 0:
+            print(prod(p) * prod(n) % mod)
+            exit()
+        else:
+            if z > 0:
+                print(0)
+                exit()
+            else:
+                print(-prod(p)*prod(n) % mod)
+                exit()
+
     if k & 1 == 1:
         if len(p) == 0:
             if z > 0:
@@ -52,18 +68,6 @@ def main():
         else:
             k -= 1
             ans = p.pop() % mod
-
-    if len(p) + len(n) < k:
-        print(0)
-        exit()
-
-    if len(n) & 1 == 1 and (len(p) + len(n) == k):
-        if z > 0:
-            print(0)
-            exit()
-        else:
-            print(-prod(p) * prod(n) % mod)
-            exit()
 
     q = []
 
